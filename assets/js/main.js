@@ -7,21 +7,54 @@ if (checkstorageID === "undefined") {
 
 const form = document.querySelector('.form');
 const send = document.querySelector('.send');
-const tarefas = document.querySelector('.tarefas')
-const listaTarefas = document.querySelector('.listaTarefas');
-const button = document.createElement("button");
-button.innerHTML = "Deletar";
+const task = document.querySelector('.task');
+const taskList = document.querySelector('.taskList');
+const deleteAll = document.querySelector('.deleteAll');
 let storageData;
+let idArray = [];
+let idCount = 0;
+
 
 document.addEventListener('click', function(e) {
     const elementID = e.target;
 
 if (elementID.classList.contains('send')) {
-    listaTarefas.innerHTML += `${tarefas.value}  `;
-    listaTarefas.appendChild(button);
-    listaTarefas.innerHTML += "<br>";
-    localStorage.storageData += `${tarefas.value}  `;
-    console.log(localStorage.storageData); //na hr de ler o que foi guardado aparece uns negocio mt loko.
+    if (!task.value || !/\S/.test(task.value)) {
+        return;
+    }
+        localStorage.storageData += `${task.value}  `;
+        // taskList.innerHTML += `${task.value}  `;
+        const paragraph = document.createElement("P");
+        paragraph.id = `paragraph${idCount}`;
+        const buttonDelete = document.createElement('button');
+        buttonDelete.innerHTML = "Deletar";
+        buttonDelete.id = `buttonDelete${idCount}`; idArray.push(idCount);
+        buttonDelete.className = `buttonDelete`; idCount++;
+        paragraph.innerHTML = `${task.value}  `;
+        paragraph.appendChild(buttonDelete);
+        taskList.appendChild(paragraph);
+        console.log(localStorage.storageData);
 }
 
+if (elementID.classList.contains('deleteAll')) {
+    localStorage.clear();
+}
+
+if (elementID.classList.contains('buttonDelete')) {
+    let checkID;
+    let i = 0;
+    do {
+        checkID = `buttonDelete${i}`;
+        i++;
+    }
+    while (elementID.id != checkID);
+    
+    removeTask(checkID);
+}
+
+function removeTask(checkID) {
+    const elementButton = document.getElementById(`${checkID}`);
+    elementParagraph = elementButton.parentNode;
+    elementParagraph.parentNode.removeChild(elementParagraph);
+}
 })
