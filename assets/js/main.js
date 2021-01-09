@@ -18,6 +18,7 @@ document.addEventListener('keyup', function(event) {
     if (event.code === 'Enter') {
         saveTaskOnCache(task);
         printTaskOnHTML(task);
+        document.getElementById("text").value = "";
     }
 })
 
@@ -30,7 +31,7 @@ if (clickElement.classList.contains('send')) { // get event of 'send' when hitin
     }
         saveTaskOnCache(task);
         printTaskOnHTML(task);
-        console.log(index);
+        document.getElementById("text").value = "";
 }
 
 if (clickElement.classList.contains('deleteAll')) { // get event of 'deleteAll' when hitting 'Delete All' button.
@@ -117,7 +118,6 @@ function createParagraph(buttonDelete, data, tempIndexID) {
         paragraph.appendChild(buttonDelete); // Add a button to it.
         taskList.appendChild(paragraph); // Add the paragraph to the taskList window.
     }
-
 }
 
 function counting() {
