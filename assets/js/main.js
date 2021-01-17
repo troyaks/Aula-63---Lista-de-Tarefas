@@ -209,4 +209,3 @@ function initPage() {
         return [tempIndex, tempTaskNameOnCache]; // Return initialized Index and TaskName.
     }
 }
-
