@@ -14,7 +14,7 @@ const checkstorageID = typeof Storage; if (checkstorageID === "undefined") { // 
 [index, taskNameOnCache] = initPage(); // Initialize page parameters.
 
 document.addEventListener('keyup', function(event) {
-    if (event.code === 'Enter') {
+    if (event.keyCode === 13) {
         if (!task.value || !/\S/.test(task.value)) { // if the data sent has no input or only blank space
             return; // then just hit return
         }
